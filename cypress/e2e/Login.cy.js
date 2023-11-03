@@ -30,7 +30,7 @@ describe('Login Test Set', () => {
   })
 
   it('Should Not Login - Invalid Username', () => {
-    loginPage.enterUserName('admin123')
+    loginPage.enterUserName('Invalid123User!')
     loginPage.enterPassword('admin123')
     loginPage.clickLogin()
     loginPage.invalidCredentials()
@@ -38,7 +38,7 @@ describe('Login Test Set', () => {
 
     it('Should Not Login - Invalid Password', () => {
       loginPage.enterUserName('Admin')
-      loginPage.enterPassword('Admin')
+      loginPage.enterPassword('Invalid123Pass!')
       loginPage.clickLogin()
       loginPage.invalidCredentials()
       })
