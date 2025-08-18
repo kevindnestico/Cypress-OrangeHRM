@@ -1,45 +1,49 @@
-import { LoginPage } from "../support/pageObjects/LoginPage"
+import { LoginPage } from "../support/pageObjects/LoginPage";
 import { DashboardPage } from "../support/pageObjects/DashboardPage";
 
 const loginPage = new LoginPage();
 const dashboardPage = new DashboardPage();
+const baseUrl = Cypress.env("baseUrl");
+const username = Cypress.env("username");
+const password = Cypress.env("password");
 
-describe('Login Test Set', () => {
-
+describe("Login Tests", () => {
   beforeEach(() => {
-    loginPage.visitHomePage()
+    loginPage.visitHomePage(baseUrl);
   });
 
-  it('Should Login', () => {
-    loginPage.enterUserName('Admin')
-    loginPage.enterPassword('admin123')
-    loginPage.clickLogin()
-    dashboardPage.shouldLogin()
-    })
+  it("Successful Login", () => {
+    loginPage.login(username, password);
+    dashboardPage.shouldLogin();
+  });
 
-  it('Should Not Login - Null User', () => {
-    loginPage.enterPassword('admin123')
-    loginPage.clickLogin()
-    loginPage.shouldNotLogin()
-  })
+  it("Unsuccessful Login - Empty Username", () => {
+    loginPage.login("", password);
+    loginPage.shouldNotLogin();
+  });
 
-  it('Should Not Login - Null Password', () => {
-    loginPage.enterUserName('Admin')
-    loginPage.clickLogin()
-    loginPage.shouldNotLogin()
-  })
+  it("Unsuccessful Login - Empty Password", () => {
+    loginPage.login(username, "");
+    loginPage.shouldNotLogin();
+  });
 
-  it('Should Not Login - Invalid Username', () => {
-    loginPage.enterUserName('Invalid123User!')
-    loginPage.enterPassword('admin123')
-    loginPage.clickLogin()
-    loginPage.invalidCredentials()
-    })
+  it("Unsuccessful Login - Empty Username And Password", () => {
+    loginPage.login("", "");
+    loginPage.shouldNotLogin();
+  });
 
-    it('Should Not Login - Invalid Password', () => {
-      loginPage.enterUserName('Admin')
-      loginPage.enterPassword('Invalid123Pass!')
-      loginPage.clickLogin()
-      loginPage.invalidCredentials()
-      })
-})
+  it("Unsuccessful Login - Invalid Username", () => {
+    loginPage.login("invalidUsername123", password);
+    loginPage.invalidCredentials();
+  });
+
+  it("Unsuccessful Login - Invalid Password", () => {
+    loginPage.login(username, "invalidPassword123");
+    loginPage.invalidCredentials();
+  });
+
+  it("Unsuccessful Login - Invalid Username And Password", () => {
+    loginPage.login("invalidUsername123", "invalidPassword123");
+    loginPage.invalidCredentials();
+  });
+});
