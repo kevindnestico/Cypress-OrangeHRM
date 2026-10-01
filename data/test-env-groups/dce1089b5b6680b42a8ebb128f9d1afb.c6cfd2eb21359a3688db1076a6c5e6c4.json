@@ -1,0 +1,1 @@
+{"id":"dce1089b5b6680b42a8ebb128f9d1afb.c6cfd2eb21359a3688db1076a6c5e6c4","fullName":"cypress-orangehrm:cypress/e2e/auth/login.cy.js#Login usernames are case-insensitive logs in with a lowercase username","name":"logs in with a lowercase username","status":"passed","testResultsByEnv":{"default":"fbacaab3b2ba6c0742fe002b93fc8925"}}
