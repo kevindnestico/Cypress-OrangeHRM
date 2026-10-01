@@ -22,9 +22,12 @@
     "report:generate": "allure generate allure-results",
     "report:open": "allure open allure-report",
     "report": "npm run report:generate && npm run report:open",
-    "clean": "rm -rf allure-results allure-report cypress/screenshots cypress/videos"
+    "clean": "rm -rf allure-results allure-report cypress/screenshots cypress/videos ai-analysis.md",
+    "test:unit": "node --test \"ai/**/*.test.js\"",
+    "test:ai": "AI_ANALYSIS=true cypress run"
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "^0.131.0",
     "@cypress/grep": "^7.0.0",
     "@eslint/js": "^10.0.1",
     "@faker-js/faker": "^10.6.0",
@@ -38,6 +41,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-cypress": "^7.0.2",
     "globals": "^17.13.0",
-    "prettier": "^3.9.9"
+    "prettier": "^3.9.9",
+    "zod": "^4.6.5"
   }
 }

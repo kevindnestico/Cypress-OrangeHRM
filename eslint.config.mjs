@@ -15,8 +15,12 @@ export default [
   },
   js.configs.recommended,
   {
-    files: ["*.js", "*.mjs"],
+    files: ["*.js", "*.mjs", "ai/**/*.js"],
     languageOptions: { globals: globals.node },
+  },
+  {
+    files: ["ai/**/*.js"],
+    languageOptions: { sourceType: "commonjs" },
   },
   {
     files: ["cypress/**/*.js"],
