@@ -1,0 +1,52 @@
+{
+  "validUsernameVariants": [
+    { "title": "lowercase username", "transform": "lowercase" },
+    { "title": "uppercase username", "transform": "uppercase" }
+  ],
+  "invalidCredentials": [
+    { "title": "unknown username", "username": "qa.unknown.user", "password": "{adminPassword}" },
+    { "title": "wrong password", "username": "{adminUsername}", "password": "WrongPass!123" },
+    {
+      "title": "unknown username and wrong password",
+      "username": "qa.unknown.user",
+      "password": "WrongPass!123"
+    },
+    {
+      "title": "password in a different case",
+      "username": "{adminUsername}",
+      "password": "{adminPassword|uppercase}"
+    },
+    {
+      "title": "password with a trailing space",
+      "username": "{adminUsername}",
+      "password": "{adminPassword} "
+    },
+    {
+      "title": "username surrounded by spaces",
+      "username": " {adminUsername} ",
+      "password": "{adminPassword}"
+    },
+    { "title": "SQL injection", "username": "' OR '1'='1' --", "password": "' OR '1'='1' --" },
+    { "title": "script injection", "username": "<script>alert(1)</script>", "password": "x" }
+  ],
+  "missingFields": [
+    {
+      "title": "empty username",
+      "username": "",
+      "password": "{adminPassword}",
+      "required": ["Username"]
+    },
+    {
+      "title": "empty password",
+      "username": "{adminUsername}",
+      "password": "",
+      "required": ["Password"]
+    },
+    {
+      "title": "both fields empty",
+      "username": "",
+      "password": "",
+      "required": ["Username", "Password"]
+    }
+  ]
+}

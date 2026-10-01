@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Local environment
+.env
+cypress.env.json
+
+# Test output
+allure-results/
+allure-report/
+cypress/screenshots/
+cypress/videos/
+cypress/downloads/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+history/

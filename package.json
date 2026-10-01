@@ -1,21 +1,43 @@
 {
-  "name": "orange-hrm-cypress",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "cypress": "^13.17.0",
-    "cypress-mochawesome-reporter": "^4.0.0",
-    "dotenv": "^17.2.1"
-  },
+  "name": "cypress-orangehrm",
+  "version": "2.0.0",
+  "description": "E2E test framework for OrangeHRM built with Cypress, JavaScript and the Page Object Model",
+  "author": "Kevin Nestico",
+  "license": "MIT",
+  "private": true,
   "type": "commonjs",
-  "dependencies": {
-    "chance": "^1.1.13"
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "cy:open": "cypress open --e2e",
+    "test": "cypress run",
+    "test:chrome": "cypress run --browser chrome",
+    "test:firefox": "cypress run --browser firefox",
+    "test:smoke": "cypress run --expose grepTags=@smoke,grepFilterSpecs=true,grepOmitFiltered=true",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "report:generate": "allure generate allure-results",
+    "report:open": "allure open allure-report",
+    "report": "npm run report:generate && npm run report:open",
+    "clean": "rm -rf allure-results allure-report cypress/screenshots cypress/videos"
+  },
+  "devDependencies": {
+    "@cypress/grep": "^7.0.0",
+    "@eslint/js": "^10.0.1",
+    "@faker-js/faker": "^10.6.0",
+    "allure": "^3.19.1",
+    "allure-cypress": "^3.13.0",
+    "allure-js-commons": "^3.13.0",
+    "axe-core": "^4.13.0",
+    "cypress": "^16.1.1",
+    "dotenv": "^18.0.5",
+    "eslint": "^10.11.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-cypress": "^7.0.2",
+    "globals": "^17.13.0",
+    "prettier": "^3.9.9"
   }
 }

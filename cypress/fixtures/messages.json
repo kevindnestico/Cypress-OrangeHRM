@@ -1,0 +1,22 @@
+{
+  "login": {
+    "invalidCredentials": "Invalid credentials",
+    "required": "Required",
+    "accountDisabled": "Account disabled"
+  },
+  "toast": {
+    "saved": "Successfully Saved",
+    "updated": "Successfully Updated",
+    "deleted": "Successfully Deleted",
+    "noRecords": "No Records Found"
+  },
+  "validation": {
+    "required": "Required",
+    "alreadyExists": "Already exists",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "usernameTooShort": "Should be at least 5 characters",
+    "passwordTooShort": "Should have at least 7 characters",
+    "employeeIdExists": "Employee Id already exists",
+    "invalidEmployee": "Invalid"
+  }
+}
