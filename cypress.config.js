@@ -3,10 +3,13 @@ const os = require("node:os");
 const { defineConfig } = require("cypress");
 const { allureCypress } = require("allure-cypress/reporter");
 const { plugin: grepPlugin } = require("@cypress/grep/plugin");
+const { FailureAnalyzer, toMarkdown } = require("./ai/failureAnalyzer");
 
 require("dotenv").config({ quiet: true });
 
 const baseUrl = process.env.BASE_URL || "https://opensource-demo.orangehrmlive.com";
+// Claude root-cause analysis of failed tests: opt-in, see ai/failureAnalyzer.js
+const aiAnalysis = process.env.AI_ANALYSIS === "true";
 
 module.exports = defineConfig({
   e2e: {
@@ -32,6 +35,10 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       grepPlugin(config);
 
+      config.expose = { ...config.expose, aiAnalysis };
+      const analyzer = aiAnalysis ? new FailureAnalyzer() : null;
+      if (aiAnalysis) fs.rmSync("ai-analysis.md", { force: true });
+
       allureCypress(on, config, {
         resultsDir: "allure-results",
         environmentInfo: {
@@ -51,6 +58,18 @@ module.exports = defineConfig({
         table(rows) {
           console.table(rows);
           return null;
+        },
+        async analyzeFailure(context) {
+          if (!analyzer) return null;
+          const analysis = await analyzer.analyze(context);
+          if (!analysis) {
+            return { unavailable: analyzer.disabledReason ?? "No analysis returned (see logs)" };
+          }
+          const markdown = toMarkdown(analysis);
+          console.log(`\n[ai] ${context.testTitle}\n${markdown}\n`);
+          // One file for the whole run; CI publishes it in the GitHub Actions job summary.
+          fs.appendFileSync("ai-analysis.md", `# ${context.testTitle}\n\n${markdown}\n\n`);
+          return { analysis, markdown };
         },
       });
 

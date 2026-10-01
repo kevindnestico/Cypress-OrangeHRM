@@ -18,3 +18,4 @@ cypress/downloads/
 .vscode/*
 !.vscode/extensions.json
 history/
+ai-analysis.md

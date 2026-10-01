@@ -26,6 +26,8 @@ jobs:
           CYPRESS_INSTALL_BINARY: 0
       - run: npm run lint
       - run: npm run format:check
+      - name: Unit tests (AI failure analyzer, fake client)
+        run: npm run test:unit
 
   test:
     needs: lint
@@ -50,6 +52,18 @@ jobs:
           # Optional repository secrets; the public demo credentials are used when unset.
           ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME }}
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          # Claude root-cause analysis of failed tests: only when the secret is configured, only on
+          # Chrome (a real failure is almost always the same in both browsers) and at most 3 per run.
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          AI_ANALYSIS: ${{ matrix.browser == 'chrome' && secrets.ANTHROPIC_API_KEY != '' }}
+          AI_ANALYSIS_MODEL: claude-sonnet-5-5
+          AI_ANALYSIS_MAX: 3
+
+      - name: Add Claude failure analysis to the job summary
+        if: failure() && hashFiles('ai-analysis.md') != ''
+        run: |
+          echo "## Claude failure analysis (${{ matrix.browser }})" >> "$GITHUB_STEP_SUMMARY"
+          cat ai-analysis.md >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload Allure results
         if: always()
