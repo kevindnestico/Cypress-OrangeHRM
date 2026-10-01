@@ -1,0 +1,57 @@
+{
+  "adminMenu": [
+    { "item": "Admin", "path": "/web/index.php/admin/viewSystemUsers", "module": "Admin" },
+    { "item": "PIM", "path": "/web/index.php/pim/viewEmployeeList", "module": "PIM" },
+    { "item": "Leave", "path": "/web/index.php/leave/viewLeaveList", "module": "Leave" },
+    { "item": "Time", "path": "/web/index.php/time/viewEmployeeTimesheet", "module": "Time" },
+    {
+      "item": "Recruitment",
+      "path": "/web/index.php/recruitment/viewCandidates",
+      "module": "Recruitment"
+    },
+    {
+      "item": "My Info",
+      "path": "/web/index.php/pim/viewPersonalDetails/empNumber/",
+      "module": "PIM"
+    },
+    {
+      "item": "Performance",
+      "path": "/web/index.php/performance/searchEvaluatePerformanceReview",
+      "module": "Performance"
+    },
+    { "item": "Dashboard", "path": "/web/index.php/dashboard/index", "module": "Dashboard" },
+    {
+      "item": "Directory",
+      "path": "/web/index.php/directory/viewDirectory",
+      "module": "Directory"
+    },
+    {
+      "item": "Maintenance",
+      "path": "/web/index.php/maintenance/purgeEmployee",
+      "reauthentication": "Administrator Access"
+    },
+    { "item": "Claim", "path": "/web/index.php/claim/viewAssignClaim", "module": "Claim" },
+    { "item": "Buzz", "path": "/web/index.php/buzz/viewBuzz", "module": "Buzz" }
+  ],
+  "essMenu": ["Leave", "Time", "My Info", "Performance", "Dashboard", "Directory", "Claim", "Buzz"],
+  "adminOnlyRoutes": [
+    "/web/index.php/admin/viewSystemUsers",
+    "/web/index.php/pim/viewEmployeeList",
+    "/web/index.php/pim/addEmployee"
+  ],
+  "protectedRoutes": [
+    "/web/index.php/dashboard/index",
+    "/web/index.php/admin/viewSystemUsers",
+    "/web/index.php/pim/viewEmployeeList",
+    "/web/index.php/pim/viewMyDetails"
+  ],
+  "dashboardWidgets": [
+    "Time at Work",
+    "My Actions",
+    "Quick Launch",
+    "Buzz Latest Posts",
+    "Employees on Leave Today",
+    "Employee Distribution by Sub Unit",
+    "Employee Distribution by Location"
+  ]
+}

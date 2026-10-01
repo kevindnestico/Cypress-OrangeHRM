@@ -1,91 +1,161 @@
-Cypress-OrangeHRM
+# OrangeHRM E2E Automation — Cypress + JavaScript
 
-- Project Overview
-  This project showcases automated tests for the OrangeHRM web application using Cypress. It includes test cases for login functionality, user management, and other core features, leveraging the Page Object Model (POM) for maintainable test code, dotenv for secure environment configuration, and Chance for generating dynamic test data. The project demonstrates best practices in test automation with JavaScript.
+[![E2E Tests](https://github.com/kevindnestico/Cypress-OrangeHRM/actions/workflows/e2e.yml/badge.svg)](https://github.com/kevindnestico/Cypress-OrangeHRM/actions/workflows/e2e.yml)
+[![Allure Report](https://img.shields.io/badge/Allure-report-orange?logo=qameta)](https://kevindnestico.github.io/Cypress-OrangeHRM/)
+![Cypress](https://img.shields.io/badge/cypress-16-69D3A7?logo=cypress)
+![Node](https://img.shields.io/badge/node-22%2B-339933?logo=node.js)
+[![ESLint](https://img.shields.io/badge/lint-eslint-4B32C3?logo=eslint)](https://eslint.org/)
 
-- Prerequisites
-  Before setting up and running the project, ensure you have the following installed on your computer:
+End-to-end test framework for the [OrangeHRM open-source demo](https://opensource-demo.orangehrmlive.com/)
+built with **Cypress 16** and **JavaScript**, using the **Page Object Model** with reusable UI components,
+**API-driven test data** and an **Allure** report published to GitHub Pages from **GitHub Actions**
+(Chrome and Firefox).
 
-  Node.js: Version 18.x or higher (LTS recommended). Download from nodejs.org.
-  Git: For cloning the repository. Install from git-scm.com.
-  A modern web browser: Chrome, Firefox, or Edge (Cypress supports these for running tests).
-  Code Editor: Visual Studio Code or any preferred editor for viewing/editing the code.
+**67 tests** covering login, session security, role-based access, navigation, user management, employee
+management (PIM), network behavior and accessibility.
 
-  Verify Node.js installation:bash
-  node --version
-  npm --version
+---
 
-- Setup Instructions
-  Follow these steps to clone, install, and run the project locally:
-  Clone the Repository
-  Clone this project to your local machine:
+## Highlights
 
-  bash
-  git clone https://github.com/kevindnestico/Cypress-OrangeHRM.git
+|                                        |                                                                                                                                                                                                                                                      |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 🔐 **Login once with `cy.session`**    | Login is programmatic (CSRF token + form POST through `cy.request`), cached with `cy.session` across tests and specs, validated with a cheap API call and recreated automatically if the server expires it. Only the login specs use the login form. |
+| 🧩 **Page Objects + components**       | Pages extend a `BasePage` that owns the shared layout (`SideMenu`, `TopBar`, `Toast`). Forms, tables and confirm dialogs are reusable components used by every page.                                                                                 |
+| 🏷️ **Label-based locators**            | OrangeHRM has no ids or `data-test` attributes, so fields are located by their visible label (like `getByLabel` in Playwright), never by `:nth-child` chains.                                                                                        |
+| ⚡ **API-driven preconditions**        | Employees and users that a test needs are created through OrangeHRM's REST API, so each test only drives the UI it is actually testing.                                                                                                              |
+| 🧹 **Automatic cleanup**               | Every record created by a test (through the API or the UI) is registered and deleted in a global `afterEach`, even when the test fails. The shared public demo is left as it was found.                                                              |
+| 🎲 **Unique test data**                | Factories built on Faker give every record a unique token, so parallel CI jobs and other demo users never collide.                                                                                                                                   |
+| 📄 **Data-driven tests from fixtures** | Login cases (incl. SQL/script injection, case sensitivity, whitespace), navigation map, dashboard widgets and messages live in JSON fixtures. Fixtures never contain credentials: they reference them as `{adminPassword}` placeholders.             |
+| 🌐 **Network control**                 | `cy.intercept` waits for real API calls instead of fixed sleeps, asserts request parameters, and stubs empty lists, slow responses and server errors.                                                                                                |
+| ♿ **Accessibility**                   | axe-core scans on the main pages (injected with a custom command, no wrapper plugin). New critical/serious violations fail the build; OrangeHRM's current defects are documented in a known-issues fixture.                                          |
+| 🔑 **Secrets out of the bundle**       | Credentials come from `.env` / CI secrets and are read with `cy.env()`, so they are never bundled into the spec files or shown in the command log.                                                                                                   |
+| 📊 **Allure report**                   | Allure 3 report with steps, screenshots, axe results and trend history, published to GitHub Pages.                                                                                                                                                   |
 
-  Navigate to the Project Directory
-  Change into the project folder:
+## Tech stack
 
-  bash
-  cd Cypress-OrangeHRM
+Cypress 16 · JavaScript (ES modules) · Allure 3 (`allure-cypress`) · `@cypress/grep` · axe-core · Faker ·
+dotenv · ESLint 10 (`eslint-plugin-cypress`) · Prettier · GitHub Actions
 
-  Install Dependencies
-  Install Cypress, dotenv, Chance, and other project dependencies using npm:
+## Project structure
 
-  bash
-  npm install
+```
+├── cypress/
+│   ├── e2e/                    # Specs by feature
+│   │   ├── a11y/               #   axe-core scans
+│   │   ├── admin/              #   User Management (CRUD, validation)
+│   │   ├── auth/               #   Login, session, logout, disabled accounts
+│   │   ├── dashboard/          #   Widgets, side menu, ESS role restrictions
+│   │   ├── network/            #   Stubs, spies, slow and failing APIs
+│   │   └── pim/                #   Employees (add, search, validation, delete)
+│   ├── fixtures/               # Login cases, messages, navigation map, a11y known issues, API stubs
+│   ├── pages/                  # Page Objects
+│   │   ├── components/         #   Form, Table, SideMenu, TopBar, Toast, ConfirmDialog
+│   │   ├── admin/  pim/        #   Pages per module
+│   │   └── BasePage.js
+│   └── support/
+│       ├── api/                # REST API client + cleanup registry
+│       ├── commands/           # cy.login / cy.loginAsAdmin (cy.session), axe commands
+│       ├── factories/          # Faker-based builders for employees and users
+│       ├── utils/              # Fixture placeholder resolver
+│       ├── routes.js           # App routes and API base path
+│       └── e2e.js              # Allure, grep, global cleanup hook
+├── .github/workflows/e2e.yml   # CI: lint → tests (Chrome, Firefox) → Allure report on GitHub Pages
+├── cypress.config.js
+├── allurerc.mjs
+└── eslint.config.mjs
+```
 
-  Note: This command installs all required packages listed in package.json, including cypress, dotenv, and chance.
+## Test coverage
 
-- Set Up Environment Variables
-  Create a .env file in the project root to store environment variables for the OrangeHRM demo site.
-  Copy and paste the following content into the .env file:
+| Area               | Spec                          | What it checks                                                                                                                                                                                                     |
+| ------------------ | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Login              | `auth/login.cy.js`            | Valid login (button and Enter key), case-insensitive usernames, 8 data-driven invalid credential cases, client-side required validation without a server call, password masking, forgot password                   |
+| Session & security | `auth/session.cy.js`          | Protected routes redirect to login, HttpOnly session cookie, reload keeps the session, logout + back button, disabled accounts cannot log in                                                                       |
+| Navigation & roles | `dashboard/navigation.cy.js`  | Dashboard widgets, full side menu, every menu item opens its module, menu search, re-authentication for Maintenance, ESS users see only self-service modules and get blocked on admin URLs and admin API endpoints |
+| User Management    | `admin/user-management.cy.js` | Create a user from the UI and log in with it, required fields, password confirmation, duplicate username, edit status, delete and cancel delete                                                                    |
+| Employees (PIM)    | `pim/employee.cy.js`          | Add an employee, required names, duplicate Employee Id, search by name (autocomplete) and id, delete                                                                                                               |
+| Network            | `network/network.cy.js`       | No failed API calls on the dashboard, search query parameters, stubbed empty list, slow response loader, stubbed 500                                                                                               |
+| Accessibility      | `a11y/accessibility.cy.js`    | axe-core on login, dashboard, system users, add user and employee list                                                                                                                                             |
 
-  BASE_URL=https://opensource-demo.orangehrmlive.com
+## Getting started
 
-  USERNAME=Admin
+Requirements: Node.js 22+ and Chrome or Firefox.
 
-  PASSWORD=admin123
+```bash
+git clone https://github.com/kevindnestico/Cypress-OrangeHRM.git
+```
 
-  Steps to create the .env file:
+```bash
+cd Cypress-OrangeHRM && npm ci
+```
 
-  In the project root (Cypress-OrangeHRM/), create a file named .env using a text editor.
-  Add the above lines exactly as shown.
-  Save the file.
+Optional: `cp .env.example .env` to point to another OrangeHRM instance or use other credentials. Without a
+`.env` file the public demo and its published credentials are used.
 
-  Note: The .env file is ignored by .gitignore to prevent sensitive data from being committed. Do not share or commit this file.
+## Running tests
 
-  Verify Cypress Installation
-  Ensure Cypress is installed correctly by running:
-  bash
-  npx cypress verify
+| Command                                           | What it does                                                                     |
+| ------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `npm run cy:open`                                 | Interactive Cypress runner                                                       |
+| `npm test`                                        | All specs, headless (Electron)                                                   |
+| `npm run test:chrome` / `npm run test:firefox`    | All specs in a specific browser                                                  |
+| `npm run test:smoke`                              | Only tests tagged `@smoke`                                                       |
+| `npx cypress run --expose grepTags=@admin`        | Any tag: `@smoke`, `@auth`, `@navigation`, `@admin`, `@pim`, `@network`, `@a11y` |
+| `npx cypress run --expose grep="logs out",burn=5` | Repeat a test 5 times to check it is not flaky                                   |
+| `npm run lint` / `npm run format:check`           | ESLint and Prettier                                                              |
 
-- Running the Tests
-  You can run the Cypress tests in two modes: interactive (Cypress Test Runner) or headless (command line).Option 1: Run Tests in Interactive ModeLaunch the Cypress Test Runner to visually select and run tests:
+## Allure report
 
-  bash
-  npx cypress open
+Every run writes results to `allure-results/`.
 
-  The Cypress Test Runner will open.
-  Select the browser (e.g., Chrome or Electron).
-  Choose a test file from the cypress/e2e directory to run.
+```bash
+npm run report
+```
 
-  Option 2: Run Tests in Headless ModeRun all tests in headless mode (ideal for CI/CD or quick execution):
+This generates the report in `allure-report/` and opens it. Each test includes its Cypress steps, the
+browser as a parameter, screenshots on failure, and the full axe-core output for the accessibility tests.
 
-  bash
-  npx cypress run
+CI merges the results of all browsers, keeps the trend history and publishes the report to
+**https://kevindnestico.github.io/Cypress-OrangeHRM/**.
 
-  This will execute all test files in the cypress/e2e directory and output results to the terminal.
+## CI/CD
 
-- Viewing Test Reports
-  To view a professional HTML report of test results, including pass/fail statuses, charts, and screenshots of failed tests, follow these steps: Run Tests
-  Ensure you’ve completed the Setup Instructions (#setup-instructions). Then, run all tests in headless mode:
+[`.github/workflows/e2e.yml`](.github/workflows/e2e.yml) runs on every push to `main`, on pull requests, on a
+weekday schedule (to catch changes in the demo site) and on demand:
 
-  bash
-  npx cypress run
+1. **Lint**: ESLint and Prettier.
+2. **Tests**: Chrome and Firefox in parallel with `cypress-io/github-action`, one retry for the public demo's
+   network hiccups. Screenshots are uploaded for failures.
+3. **Report** (on `main`): merges the Allure results, restores the history and publishes to GitHub Pages.
 
-  Open the Report
-  After tests complete, find the HTML report at:
-  cypress/reports/index.html Open this file in any web browser (e.g., Chrome, Firefox).  
-  Explore test results, execution times, and embedded screenshots for failed tests.
-  Note: The report is a single file, easy to share or view, generated by cypress-mochawesome-reporter.
+Credentials can be overridden with the `ADMIN_USERNAME` and `ADMIN_PASSWORD` repository secrets.
+
+## Design decisions
+
+- **Why programmatic login?** Typing into the login form in every test is slow and makes every spec depend on
+  the login UI. The login form has its own spec; everything else starts from a cached session.
+- **Why create test data through the API?** A user-management test should not fail because the Add Employee
+  form changed. The API is also the only reliable way to clean up on a public demo that other people use at the
+  same time.
+- **Why is the cleanup registry stored on the `Cypress` object?** Cypress bundles the support file and each spec
+  separately, so a module-level variable exists twice. The first version of the cleanup silently left data
+  behind because of this.
+- **Why does `shouldBeLoaded()` wait for the module header and the loaders?** OrangeHRM is a Vue SPA: the URL
+  changes before the view is rendered and lists load asynchronously.
+- **Why known issues instead of disabling axe rules?** The report keeps showing every current defect, and any
+  new violation fails the build.
+
+## Issues found in OrangeHRM
+
+- **Uncaught `TypeError` after logout**: going back after logging out (or leaving the dashboard while its widgets
+  are loading) makes the widget requests return 401 and the app throws
+  `Cannot read properties of undefined (reading 'response')`. The test ignores only that error, in that test.
+- **Unhandled rejection in the Add User form**: leaving the page while the async username check
+  (`/admin/validation/user-name`) is in flight throws `can't access property "valid"` (seen on Firefox). The page
+  object waits for that check after typing a username.
+- **Pre-filled Employee Id can already be taken**: Add Employee proposes the next free id when the page loads, so
+  if someone else saves an employee first the form fails with "Employee Id already exists".
+- **Accessibility**: buttons without accessible names (icon buttons), inputs without associated labels,
+  insufficient color contrast and invalid list markup — see
+  [`a11y-known-issues.json`](cypress/fixtures/a11y-known-issues.json).

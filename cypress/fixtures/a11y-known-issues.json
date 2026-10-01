@@ -1,0 +1,8 @@
+{
+  "_comment": "Critical/serious axe rules OrangeHRM 5.9 currently violates on each page. They are reported (and attached to Allure) but tolerated; any rule not listed here fails the build.",
+  "login": ["color-contrast", "link-name"],
+  "dashboard": ["button-name", "color-contrast", "list", "scrollable-region-focusable"],
+  "systemUsers": ["button-name", "color-contrast", "label", "list"],
+  "addUser": ["button-name", "color-contrast", "label", "list"],
+  "employeeList": ["button-name", "color-contrast", "label", "list"]
+}
