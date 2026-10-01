@@ -1,7 +1,7 @@
 # OrangeHRM E2E Automation — Cypress + JavaScript + Claude
 
-[![E2E Tests](https://github.com/kevindnestico/Cypress-OrangeHRM/actions/workflows/e2e.yml/badge.svg)](https://github.com/kevindnestico/Cypress-OrangeHRM/actions/workflows/e2e.yml)
-[![Allure Report](https://img.shields.io/badge/Allure-report-orange?logo=qameta)](https://kevindnestico.github.io/Cypress-OrangeHRM/)
+[![E2E Tests](https://github.com/kevindnestico/orangehrm-cypress-javascript/actions/workflows/e2e.yml/badge.svg)](https://github.com/kevindnestico/orangehrm-cypress-javascript/actions/workflows/e2e.yml)
+[![Allure Report](https://img.shields.io/badge/Allure-report-orange?logo=qameta)](https://kevindnestico.github.io/orangehrm-cypress-javascript/)
 ![Cypress](https://img.shields.io/badge/cypress-16-69D3A7?logo=cypress)
 ![Node](https://img.shields.io/badge/node-22%2B-339933?logo=node.js)
 [![ESLint](https://img.shields.io/badge/lint-eslint-4B32C3?logo=eslint)](https://eslint.org/)
@@ -89,11 +89,11 @@ GitHub Actions
 Requirements: Node.js 22+ and Chrome or Firefox.
 
 ```bash
-git clone https://github.com/kevindnestico/Cypress-OrangeHRM.git
+git clone https://github.com/kevindnestico/orangehrm-cypress-javascript.git
 ```
 
 ```bash
-cd Cypress-OrangeHRM && npm ci
+cd orangehrm-cypress-javascript && npm ci
 ```
 
 Optional: `cp .env.example .env` to point to another OrangeHRM instance or use other credentials. Without a
@@ -125,7 +125,7 @@ This generates the report in `allure-report/` and opens it. Each test includes i
 browser as a parameter, screenshots on failure, and the full axe-core output for the accessibility tests.
 
 CI merges the results of all browsers, keeps the trend history and publishes the report to
-**https://kevindnestico.github.io/Cypress-OrangeHRM/**.
+**https://kevindnestico.github.io/orangehrm-cypress-javascript/**.
 
 ## AI failure analysis with Claude
 
@@ -181,7 +181,7 @@ Implementation notes:
 ## CI/CD
 
 [`.github/workflows/e2e.yml`](.github/workflows/e2e.yml) runs on every push to `main`, on pull requests, on a
-weekday schedule (to catch changes in the demo site) and on demand:
+schedule every Monday at 09:00 Italian time (to catch changes in the demo site) and on demand:
 
 1. **Lint**: ESLint, Prettier and the unit tests of the AI analyzer.
 2. **Tests**: Chrome and Firefox in parallel with `cypress-io/github-action`, one retry for the public demo's

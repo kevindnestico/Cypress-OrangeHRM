@@ -6,7 +6,9 @@ on:
   pull_request:
   workflow_dispatch:
   schedule:
-    - cron: "0 9 * * 1-5" # weekdays 09:00 UTC: catch changes in the demo site under test
+    # Mondays 09:00 Italian time (DST handled by the timezone): catch changes in the demo site.
+    - cron: "0 9 * * 1"
+      timezone: "Europe/Rome"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

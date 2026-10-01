@@ -1,5 +1,5 @@
 {
-  "name": "cypress-orangehrm",
+  "name": "orangehrm-cypress-javascript",
   "version": "2.0.0",
   "description": "E2E test framework for OrangeHRM built with Cypress, JavaScript and the Page Object Model",
   "author": "Kevin Nestico",
