@@ -1,0 +1,533 @@
+[
+  {
+    "id": "color-contrast",
+    "impact": "serious",
+    "tags": [
+      "cat.color",
+      "wcag2aa",
+      "wcag143",
+      "TTv5",
+      "TT13.c",
+      "EN-301-549",
+      "EN-9.1.4.3",
+      "ACT",
+      "RGAAv4",
+      "RGAA-3.2.1"
+    ],
+    "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=axeAPI",
+    "nodes": [
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#64728c",
+              "bgColor": "#e8eaef",
+              "contrastRatio": 4.03,
+              "fontSize": "12.0pt (16px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<div data-v-8a31f039=\"\" data-v-0af708be=\"\" class=\"oxd-sheet oxd-sheet--rounded oxd-sheet--gutters oxd-sheet--gray-lighten-2 orangehrm-demo-credentials\">",
+                "target": [
+                  ".oxd-sheet"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 4.03 (foreground color: #64728c, background color: #e8eaef, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<p data-v-7b563373=\"\" data-v-0af708be=\"\" class=\"oxd-text oxd-text--p\">Username : Admin</p>",
+        "target": [
+          ".oxd-sheet > p:nth-child(1)"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.03 (foreground color: #64728c, background color: #e8eaef, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#64728c",
+              "bgColor": "#e8eaef",
+              "contrastRatio": 4.03,
+              "fontSize": "12.0pt (16px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<div data-v-8a31f039=\"\" data-v-0af708be=\"\" class=\"oxd-sheet oxd-sheet--rounded oxd-sheet--gutters oxd-sheet--gray-lighten-2 orangehrm-demo-credentials\">",
+                "target": [
+                  ".oxd-sheet"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 4.03 (foreground color: #64728c, background color: #e8eaef, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<p data-v-7b563373=\"\" data-v-0af708be=\"\" class=\"oxd-text oxd-text--p\">Password : admin123</p>",
+        "target": [
+          ".oxd-sheet > p:nth-child(2)"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.03 (foreground color: #64728c, background color: #e8eaef, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#ffffff",
+              "bgColor": "#ff7b1d",
+              "contrastRatio": 2.59,
+              "fontSize": "10.5pt (14px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<button data-v-10d463b7=\"\" data-v-0af708be=\"\" type=\"submit\" class=\"oxd-button oxd-button--medium oxd-button--main orangehrm-login-button\"><!----> Login <!----></button>",
+                "target": [
+                  "button"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 2.59 (foreground color: #ffffff, background color: #ff7b1d, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<button data-v-10d463b7=\"\" data-v-0af708be=\"\" type=\"submit\" class=\"oxd-button oxd-button--medium oxd-button--main orangehrm-login-button\"><!----> Login <!----></button>",
+        "target": [
+          "button"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.59 (foreground color: #ffffff, background color: #ff7b1d, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      }
+    ]
+  },
+  {
+    "id": "link-name",
+    "impact": "serious",
+    "tags": [
+      "cat.name-role-value",
+      "wcag2a",
+      "wcag244",
+      "wcag412",
+      "section508",
+      "section508.22.a",
+      "TTv5",
+      "TT6.a",
+      "EN-301-549",
+      "EN-9.2.4.4",
+      "EN-9.4.1.2",
+      "ACT",
+      "RGAAv4",
+      "RGAA-6.2.1"
+    ],
+    "description": "Ensure links have discernible text",
+    "help": "Links must have discernible text",
+    "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/link-name?application=axeAPI",
+    "nodes": [
+      {
+        "any": [
+          {
+            "id": "has-visible-text",
+            "data": null,
+            "relatedNodes": [],
+            "impact": "serious",
+            "message": "Element does not have text that is visible to screen readers"
+          },
+          {
+            "id": "aria-label",
+            "data": null,
+            "relatedNodes": [],
+            "impact": "serious",
+            "message": "aria-label attribute does not exist or is empty"
+          },
+          {
+            "id": "aria-labelledby",
+            "data": null,
+            "relatedNodes": [],
+            "impact": "serious",
+            "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
+          },
+          {
+            "id": "non-empty-title",
+            "data": {
+              "messageKey": "noAttr"
+            },
+            "relatedNodes": [],
+            "impact": "serious",
+            "message": "Element has no title attribute"
+          }
+        ],
+        "all": [],
+        "none": [
+          {
+            "id": "focusable-no-name",
+            "data": null,
+            "relatedNodes": [],
+            "impact": "serious",
+            "message": "Element is in tab order and does not have accessible text"
+          }
+        ],
+        "impact": "serious",
+        "html": "<a data-v-0af708be=\"\" href=\"https://www.linkedin.com/company/orangehrm/mycompany/\" target=\"_blank\">",
+        "target": [
+          ".orangehrm-login-footer-sm > a:nth-child(1)"
+        ],
+        "failureSummary": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute"
+      },
+      {
+        "any": [
+          {
+            "id": "has-visible-text",
+            "data": null,
+            "relatedNodes": [],
+            "impact": "serious",
+            "message": "Element does not have text that is visible to screen readers"
+          },
+          {
+            "id": "aria-label",
+            "data": null,
+            "relatedNodes": [],
+            "impact": "serious",
+            "message": "aria-label attribute does not exist or is empty"
+          },
+          {
+            "id": "aria-labelledby",
+            "data": null,
+            "relatedNodes": [],
+            "impact": "serious",
+            "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
+          },
+          {
+            "id": "non-empty-title",
+            "data": {
+              "messageKey": "noAttr"
+            },
+            "relatedNodes": [],
+            "impact": "serious",
+            "message": "Element has no title attribute"
+          }
+        ],
+        "all": [],
+        "none": [
+          {
+            "id": "focusable-no-name",
+            "data": null,
+            "relatedNodes": [],
+            "impact": "serious",
+            "message": "Element is in tab order and does not have accessible text"
+          }
+        ],
+        "impact": "serious",
+        "html": "<a data-v-0af708be=\"\" href=\"https://www.facebook.com/OrangeHRM/\" target=\"_blank\">",
+        "target": [
+          "a:nth-child(2)"
+        ],
+        "failureSummary": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute"
+      },
+      {
+        "any": [
+          {
+            "id": "has-visible-text",
+            "data": null,
+            "relatedNodes": [],
+            "impact": "serious",
+            "message": "Element does not have text that is visible to screen readers"
+          },
+          {
+            "id": "aria-label",
+            "data": null,
+            "relatedNodes": [],
+            "impact": "serious",
+            "message": "aria-label attribute does not exist or is empty"
+          },
+          {
+            "id": "aria-labelledby",
+            "data": null,
+            "relatedNodes": [],
+            "impact": "serious",
+            "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
+          },
+          {
+            "id": "non-empty-title",
+            "data": {
+              "messageKey": "noAttr"
+            },
+            "relatedNodes": [],
+            "impact": "serious",
+            "message": "Element has no title attribute"
+          }
+        ],
+        "all": [],
+        "none": [
+          {
+            "id": "focusable-no-name",
+            "data": null,
+            "relatedNodes": [],
+            "impact": "serious",
+            "message": "Element is in tab order and does not have accessible text"
+          }
+        ],
+        "impact": "serious",
+        "html": "<a data-v-0af708be=\"\" href=\"https://twitter.com/orangehrm?lang=en\" target=\"_blank\">",
+        "target": [
+          "a:nth-child(3)"
+        ],
+        "failureSummary": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute"
+      },
+      {
+        "any": [
+          {
+            "id": "has-visible-text",
+            "data": null,
+            "relatedNodes": [],
+            "impact": "serious",
+            "message": "Element does not have text that is visible to screen readers"
+          },
+          {
+            "id": "aria-label",
+            "data": null,
+            "relatedNodes": [],
+            "impact": "serious",
+            "message": "aria-label attribute does not exist or is empty"
+          },
+          {
+            "id": "aria-labelledby",
+            "data": null,
+            "relatedNodes": [],
+            "impact": "serious",
+            "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
+          },
+          {
+            "id": "non-empty-title",
+            "data": {
+              "messageKey": "noAttr"
+            },
+            "relatedNodes": [],
+            "impact": "serious",
+            "message": "Element has no title attribute"
+          }
+        ],
+        "all": [],
+        "none": [
+          {
+            "id": "focusable-no-name",
+            "data": null,
+            "relatedNodes": [],
+            "impact": "serious",
+            "message": "Element is in tab order and does not have accessible text"
+          }
+        ],
+        "impact": "serious",
+        "html": "<a data-v-0af708be=\"\" href=\"https://www.youtube.com/c/OrangeHRMInc\" target=\"_blank\">",
+        "target": [
+          "a:nth-child(4)"
+        ],
+        "failureSummary": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute"
+      }
+    ]
+  },
+  {
+    "id": "region",
+    "impact": "moderate",
+    "tags": [
+      "cat.keyboard",
+      "best-practice",
+      "RGAAv4",
+      "RGAA-9.2.1"
+    ],
+    "description": "Ensure all page content is contained by landmarks",
+    "help": "All page content should be contained by landmarks",
+    "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/region?application=axeAPI",
+    "nodes": [
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div data-v-17f5fb62=\"\" data-v-6adfd385=\"\" class=\"orangehrm-login-branding\"><img data-v-17f5fb62=\"\" src=\"/web/images/ohrm_branding.png?v=1783336755185\" alt=\"company-branding\"></div>",
+        "target": [
+          ".orangehrm-login-branding"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<h5 data-v-7b563373=\"\" data-v-0af708be=\"\" class=\"oxd-text oxd-text--h5 orangehrm-login-title\">Login</h5>",
+        "target": [
+          "h5"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div data-v-0af708be=\"\" class=\"orangehrm-login-error\">",
+        "target": [
+          ".orangehrm-login-error"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div data-v-2130bd2a=\"\" data-v-0af708be=\"\" class=\"oxd-form-row\">",
+        "target": [
+          ".oxd-form-row[data-v-2130bd2a=\"\"]:nth-child(2)"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div data-v-2130bd2a=\"\" data-v-0af708be=\"\" class=\"oxd-form-row\">",
+        "target": [
+          ".oxd-form-row[data-v-2130bd2a=\"\"]:nth-child(3)"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div data-v-0af708be=\"\" class=\"orangehrm-login-forgot\"><p data-v-7b563373=\"\" data-v-0af708be=\"\" class=\"oxd-text oxd-text--p orangehrm-login-forgot-header\">Forgot your password? </p></div>",
+        "target": [
+          ".orangehrm-login-forgot"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div class=\"orangehrm-copyright-wrapper\">",
+        "target": [
+          ".orangehrm-copyright-wrapper"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      },
+      {
+        "any": [
+          {
+            "id": "region",
+            "data": {
+              "isIframe": false
+            },
+            "relatedNodes": [],
+            "impact": "moderate",
+            "message": "Some page content is not contained by landmarks"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "moderate",
+        "html": "<div data-v-6adfd385=\"\" class=\"orangehrm-login-logo\"><img data-v-6adfd385=\"\" src=\"/web/images/ohrm_logo.png\" alt=\"orangehrm-logo\"></div>",
+        "target": [
+          ".orangehrm-login-logo"
+        ],
+        "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+      }
+    ]
+  }
+]
