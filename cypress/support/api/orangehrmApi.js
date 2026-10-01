@@ -49,3 +49,15 @@ export const usersApi = {
     return request("GET", "/admin/users", { qs: { username, limit: 50 } }).its("body.data");
   },
 };
+
+export const localizationApi = {
+  /** Yields `{ language, dateFormat }`, e.g. `{ language: "en_US", dateFormat: "Y-m-d" }`. */
+  get() {
+    return request("GET", "/admin/localization").its("body.data");
+  },
+
+  /** Same request the Admin › Localization page sends when saving. */
+  update({ language, dateFormat }) {
+    return request("PUT", "/admin/localization", { body: { language, dateFormat } });
+  },
+};

@@ -5,8 +5,14 @@ import * as allure from "allure-js-commons";
 import { cleanup } from "./api/cleanup";
 import "./commands/a11y";
 import "./commands/auth";
+import "./commands/locale";
 
 registerGrep();
+
+// The shared demo's language can be changed by anyone: check (and restore) it before each spec.
+before(() => {
+  cy.ensureDemoLanguage();
+});
 
 beforeEach(() => {
   // CI runs the suite on several browsers and merges the results into one Allure report.
