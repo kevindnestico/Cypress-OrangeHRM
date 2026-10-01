@@ -162,16 +162,21 @@ Implementation notes:
 
 - **Structured outputs** with a Zod schema (`client.beta.messages.parse` + `betaZodOutputFormat`), so the
   response is always valid, typed JSON.
-- **Prompt caching**: the system prompt is static and includes the project's architecture, the known OrangeHRM
-  defects and the accessibility known issues, so it is cached across failures.
+- **Cache-ready system prompt**: static (no per-test data), with the project's architecture, the known
+  OrangeHRM defects and the accessibility known issues. At ~1.3K tokens it is below the models' minimum
+  cacheable prefix, so caching only kicks in if it grows; the cost impact is under a cent per analysis.
 - **Safe by default**: off unless `AI_ANALYSIS=true`; at most `AI_ANALYSIS_MAX` analyses per run (default 10);
   API problems are logged and never change the test result; invalid credentials disable it for the rest of
   the run.
 - **Refusal fallback**: on a safety-classifier decline the request is re-run server-side on Anthropic's
   recommended fallback model (`fallbacks: "default"`).
-- Configurable through `AI_ANALYSIS_MODEL` (default `claude-opus-5-5`) and `AI_ANALYSIS_EFFORT` (default
-  `medium`).
-- In CI it runs only when the `ANTHROPIC_API_KEY` repository secret is set.
+- Configurable through `AI_ANALYSIS_MODEL` (default `claude-opus-5-5`, for deliberate local investigation),
+  `AI_ANALYSIS_EFFORT` (default `medium`) and `AI_ANALYSIS_MAX`.
+- In CI it runs only when the `ANTHROPIC_API_KEY` repository secret is set, only on Chrome (a real failure
+  is almost always the same in both browsers), with **Claude Sonnet 5.5** (half the price of Opus) and at
+  most 3 analyses per run: when many tests fail at once there is usually a single cause.
+- Estimated cost: ~US$0.03–0.05 per analysis with Sonnet 5.5 (~US$0.06–0.10 with Opus 5.5), depending on
+  the size of the page's DOM. A green run costs nothing; the worst case in CI is ~US$0.30 per workflow.
 
 ## CI/CD
 
@@ -212,5 +217,5 @@ Credentials can be overridden with the `ADMIN_USERNAME` and `ADMIN_PASSWORD` rep
 - **Pre-filled Employee Id can already be taken**: Add Employee proposes the next free id when the page loads, so
   if someone else saves an employee first the form fails with "Employee Id already exists".
 - **Accessibility**: buttons without accessible names (icon buttons), inputs without associated labels,
-  insufficient color contrast and invalid list markup — see
+  insufficient color contrast, invalid list markup, and photos posted in Buzz rendered without alt text — see
   [`a11y-known-issues.json`](cypress/fixtures/a11y-known-issues.json).

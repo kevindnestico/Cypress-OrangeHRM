@@ -13,7 +13,10 @@ class DashboardPage extends BasePage {
   shouldBeLoaded() {
     super.shouldBeLoaded();
     cy.get(".orangehrm-dashboard-widget").should("have.length.at.least", 1);
-    cy.get(".orangehrm-dashboard-widget .oxd-loading-spinner").should("not.exist");
+    // Each widget loads its own API call; on the shared demo they sometimes take over 10s.
+    cy.get(".orangehrm-dashboard-widget .oxd-loading-spinner", { timeout: 30000 }).should(
+      "not.exist",
+    );
     return this;
   }
 

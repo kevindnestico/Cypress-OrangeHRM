@@ -52,9 +52,12 @@ jobs:
           # Optional repository secrets; the public demo credentials are used when unset.
           ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME }}
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-          # Claude root-cause analysis of failed tests runs only when the secret is configured.
+          # Claude root-cause analysis of failed tests: only when the secret is configured, only on
+          # Chrome (a real failure is almost always the same in both browsers) and at most 3 per run.
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          AI_ANALYSIS: ${{ secrets.ANTHROPIC_API_KEY != '' }}
+          AI_ANALYSIS: ${{ matrix.browser == 'chrome' && secrets.ANTHROPIC_API_KEY != '' }}
+          AI_ANALYSIS_MODEL: claude-sonnet-5-5
+          AI_ANALYSIS_MAX: 3
 
       - name: Add Claude failure analysis to the job summary
         if: failure() && hashFiles('ai-analysis.md') != ''

@@ -1,8 +1,9 @@
 /**
  * Prompts for the failure analyzer.
  *
- * The system prompt is static (no timestamps, ids or per-test data) so it is served from the
- * prompt cache across every failure in a run.
+ * The system prompt is static (no timestamps, ids or per-test data), so it is cacheable. At its
+ * current size (~1.3K tokens) it is below the minimum cacheable prefix of the Claude models, so the
+ * cache_control marker only takes effect if the prompt grows.
  */
 const knownA11yIssues = require("../cypress/fixtures/a11y-known-issues.json");
 
