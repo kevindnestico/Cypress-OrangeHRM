@@ -1,1 +1,0 @@
-{"id":"264c618b007c464d098cab1661919463.20e79cfe394cfedc961bb6eaeed559da","fullName":"cypress-orangehrm:cypress/e2e/auth/session.cy.js#Session and access control with a session keeps the user logged in after a reload","name":"keeps the user logged in after a reload","status":"passed","testResultsByEnv":{"default":"cdba09920192ab145a63b5d670449562"}}

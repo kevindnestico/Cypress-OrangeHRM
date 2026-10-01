@@ -1,1 +1,0 @@
-{"id":"d50061888d2cb5af496b1fa800736396.b164ad8c13f96ac3ec2a043f405297c7","fullName":"cypress-orangehrm:cypress/e2e/auth/login.cy.js#Login validates required fields on the client flags empty username without calling the server","name":"flags empty username without calling the server","status":"passed","testResultsByEnv":{"default":"fae3716259389db37e79c059cd2c6764"}}
