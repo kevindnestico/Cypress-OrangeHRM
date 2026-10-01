@@ -1,0 +1,1 @@
+{"id":"cd72933f40ff0e0e63d8909b6aa86c0a.b164ad8c13f96ac3ec2a043f405297c7","fullName":"cypress-orangehrm:cypress/e2e/dashboard/navigation.cy.js#Dashboard and navigation as an ESS (non-admin) user cannot call admin-only API endpoints","name":"cannot call admin-only API endpoints","status":"passed","testResultsByEnv":{"default":"8ddb3a0f0eeaedf88512ed3dc9ca4ea2"}}
