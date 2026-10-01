@@ -25,11 +25,23 @@ class UserFormPage extends BasePage {
     if (role) this.form.select("User Role", role);
     if (employee) this.form.autocomplete("Employee Name", employee.searchText, employee.fullName);
     if (status) this.form.select("Status", status);
-    if (username !== undefined) this.form.fill("Username", username);
+    if (username !== undefined) this.fillUsername(username);
     if (password !== undefined) this.form.fill("Password", password, { sensitive: true });
     if (confirmPassword !== undefined) {
       this.form.fill("Confirm Password", confirmPassword, { sensitive: true });
     }
+    return this;
+  }
+
+  /**
+   * The username is checked for uniqueness by an async API call. Waiting for it keeps the
+   * "Already exists" error deterministic, and leaving the page while it is in flight makes
+   * OrangeHRM throw an unhandled rejection (seen on Firefox).
+   */
+  fillUsername(username) {
+    cy.intercept("GET", `${API}/admin/validation/user-name?*`).as("validateUsername");
+    this.form.fill("Username", username);
+    if (username) cy.wait("@validateUsername");
     return this;
   }
 

@@ -151,6 +151,9 @@ Credentials can be overridden with the `ADMIN_USERNAME` and `ADMIN_PASSWORD` rep
 - **Uncaught `TypeError` after logout**: going back after logging out (or leaving the dashboard while its widgets
   are loading) makes the widget requests return 401 and the app throws
   `Cannot read properties of undefined (reading 'response')`. The test ignores only that error, in that test.
+- **Unhandled rejection in the Add User form**: leaving the page while the async username check
+  (`/admin/validation/user-name`) is in flight throws `can't access property "valid"` (seen on Firefox). The page
+  object waits for that check after typing a username.
 - **Pre-filled Employee Id can already be taken**: Add Employee proposes the next free id when the page loads, so
   if someone else saves an employee first the form fails with "Employee Id already exists".
 - **Accessibility**: buttons without accessible names (icon buttons), inputs without associated labels,
