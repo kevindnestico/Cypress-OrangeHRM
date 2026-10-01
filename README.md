@@ -181,7 +181,7 @@ Implementation notes:
 ## CI/CD
 
 [`.github/workflows/e2e.yml`](.github/workflows/e2e.yml) runs on every push to `main`, on pull requests, on a
-weekday schedule (to catch changes in the demo site) and on demand:
+schedule every Monday at 09:00 Italian time (to catch changes in the demo site) and on demand:
 
 1. **Lint**: ESLint, Prettier and the unit tests of the AI analyzer.
 2. **Tests**: Chrome and Firefox in parallel with `cypress-io/github-action`, one retry for the public demo's
